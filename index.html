@@ -26,7 +26,7 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
- <style>
+   <style>
   :root{
     --bg:#0b1224;
     --card: rgba(30,41,59,.72);
@@ -163,6 +163,9 @@
   .whatsapp-float:hover{
     filter: brightness(1.05);
   }
+  
+
+
 
   .wave-container{
     position:absolute;
@@ -222,19 +225,25 @@
       -webkit-backface-visibility:hidden;
     }
 
-    .whatsapp-float{
-      transition:none !important;
-      transform:translateZ(0) !important;
-      -webkit-transform:translateZ(0) !important;
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden;
+     .whatsapp-float{
+      position:fixed; bottom:26px; right:26px;
+      width:62px; height:62px; border-radius:9999px;
+      display:flex; align-items:center; justify-content:center;
+      background:#25d366; color:white;
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+      z-index: 80;
+      text-decoration:none;
+      transition: transform .2s ease, filter .2s ease;
     }
+    .whatsapp-float:hover{ transform: scale(1.06); filter: brightness(1.05); }
+    .wave-container{ position:absolute; inset:0; border-radius:9999px; z-index:-1; }
+    .wave{ position:absolute; inset:0; border-radius:9999px; background:#25d366; opacity:.55; animation:pulse-wave 2s infinite; }
+    .wave:nth-child(2){ animation-delay:.55s; }
+    @keyframes pulse-wave{ from{ transform:scale(1); opacity:.55;} to{ transform:scale(1.9); opacity:0;} }
 
-    .wave,
-    .wave:nth-child(2){
-      animation:none !important;
-      opacity:0 !important;
-    }
+    .modal-backdrop{ position:fixed; inset:0; background: rgba(2,6,23,.72); backdrop-filter: blur(6px); z-index: 90; display:none; }
+    .modal-backdrop.open{ display:flex; }
+
   }
 </style>
 </head>
@@ -821,7 +830,7 @@
             <div class="flex gap-3 items-start"><i class="fas fa-book-open text-sky-300 mt-0.5"></i><span>Arabic Grammar Studies (International Sciences Academy, Turkey)</span></div>
           </div>
 
-          <!-- <p class="text-slate-500 text-xs mt-6">Note: Add certificate links later if available (Google Drive / PDFs / Badge URLs).</p> -->
+          <p class="text-slate-500 text-xs mt-6">Note: Add certificate links later if available (Google Drive / PDFs / Badge URLs).</p>
         </div>
       </div>
     </div>
