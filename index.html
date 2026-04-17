@@ -888,61 +888,80 @@
         </div>
 
         <div class="md:col-span-3 reveal" style="transition-delay:.12s;">
-          <form id="contactForm" class="glass rounded-2xl p-8">
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label class="block text-sm text-slate-300 mb-2" for="cname">Your Name</label>
-                <input id="cname" name="name" required
-                       class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40"
-                       placeholder="Your name" />
-                <p class="text-xs text-red-400 mt-2 hidden" data-err="name">Name is required.</p>
-              </div>
-              <div>
-                <label class="block text-sm text-slate-300 mb-2" for="cemail">Your Email</label>
-                <input id="cemail" name="email" type="email" required
-                       class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40"
-                       placeholder="name@example.com" />
-                <p class="text-xs text-red-400 mt-2 hidden" data-err="email">Valid email required.</p>
-              </div>
-            </div>
+  <form
+    id="contactForm"
+    action="https://formsubmit.co/mohamedmufas.connect@gmail.com"
+    method="POST"
+    class="glass rounded-2xl p-8"
+  >
+    <!-- FormSubmit settings -->
+    <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html">
 
-            <div class="mt-6">
-              <label class="block text-sm text-slate-300 mb-2" for="csubject">Subject</label>
-              <input id="csubject" name="subject" required
-                     class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40"
-                     placeholder="IT Support / System Admin / Security / Other" />
-              <p class="text-xs text-red-400 mt-2 hidden" data-err="subject">Subject is required.</p>
-            </div>
-
-            <div class="mt-6">
-              <label class="block text-sm text-slate-300 mb-2" for="cmessage">Message</label>
-              <textarea id="cmessage" name="message" rows="5" required
-                        class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40 resize-none"
-                        placeholder="Write your message..."></textarea>
-              <p class="text-xs text-red-400 mt-2 hidden" data-err="message">Message is required.</p>
-            </div>
-
-            <button type="submit" id="sendBtn"
-                    class="mt-7 w-full rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 transition-all shadow-[0_0_18px_rgba(56,189,248,0.18)] hover:shadow-[0_0_28px_rgba(56,189,248,0.28)]">
-              <span class="inline-flex items-center justify-center gap-2">
-                Send Message <i class="fas fa-paper-plane text-sm"></i>
-              </span>
-            </button>
-
-            <div id="successToast" class="mt-5 hidden">
-              <div class="rounded-xl border border-emerald-500/25 bg-emerald-500/10 text-emerald-200 px-4 py-3 flex items-center gap-3">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-sm"><b>Sent!</b> I’ll get back to you soon.</span>
-              </div>
-            </div>
-
-            <p class="text-slate-500 text-xs mt-4">
-              If you want real email sending: I can connect this to FormSubmit / EmailJS / your own PHP mail script.
-            </p>
-          </form>
-        </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm text-slate-300 mb-2" for="cname">Your Name</label>
+        <input
+          id="cname"
+          name="name"
+          required
+          class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40"
+          placeholder="Your name"
+        />
+        <p class="text-xs text-red-400 mt-2 hidden" data-err="name">Name is required.</p>
       </div>
+
+     <div>
+  <label class="block text-sm text-slate-300 mb-2" for="cemail">Your Email</label>
+  <input
+    id="cemail"
+    name="email"
+    type="email"
+    required
+    class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40"
+    placeholder="name@example.com"
+  />
+</div>
     </div>
+
+    <div class="mt-6">
+      <label class="block text-sm text-slate-300 mb-2" for="csubject">Subject</label>
+      <input
+        id="csubject"
+        name="subject"
+        required
+        class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40"
+        placeholder="IT Support / System Admin / Security / Other"
+      />
+      <p class="text-xs text-red-400 mt-2 hidden" data-err="subject">Subject is required.</p>
+    </div>
+
+    <div class="mt-6">
+      <label class="block text-sm text-slate-300 mb-2" for="cmessage">Message</label>
+      <textarea
+        id="cmessage"
+        name="message"
+        rows="5"
+        required
+        class="w-full rounded-xl bg-slate-900/50 border border-slate-700/70 px-4 py-3 text-white outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500/40 resize-none"
+        placeholder="Write your message..."
+      ></textarea>
+      <p class="text-xs text-red-400 mt-2 hidden" data-err="message">Message is required.</p>
+    </div>
+
+    <button
+      type="submit"
+      id="sendBtn"
+      class="mt-7 w-full rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold py-4 transition-all shadow-[0_0_18px_rgba(56,189,248,0.18)] hover:shadow-[0_0_28px_rgba(56,189,248,0.28)]"
+    >
+      <span class="inline-flex items-center justify-center gap-2">
+        Send Message <i class="fas fa-paper-plane text-sm"></i>
+      </span>
+    </button>
+  </form>
+</div>
   </section>
 
   <!-- FOOTER -->
