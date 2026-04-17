@@ -26,121 +26,217 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    :root{
-      --bg:#0b1224;
-      --card: rgba(30,41,59,.72);
-      --border: rgba(148,163,184,.14);
-      --text:#e2e8f0;
-      --muted:#94a3b8;
-      --brand:#60a5fa;
-      --brand2:#22d3ee;
-      --ok:#22c55e;
-      --danger:#ef4444;
-    }
-    body{
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: radial-gradient(1200px 600px at 15% 10%, rgba(96,165,250,.18), transparent 55%),
-                  radial-gradient(1000px 500px at 85% 25%, rgba(34,211,238,.14), transparent 55%),
-                  var(--bg);
-      color: var(--text);
+ <style>
+  :root{
+    --bg:#0b1224;
+    --card: rgba(30,41,59,.72);
+    --border: rgba(148,163,184,.14);
+    --text:#e2e8f0;
+    --muted:#94a3b8;
+    --brand:#60a5fa;
+    --brand2:#22d3ee;
+    --ok:#22c55e;
+    --danger:#ef4444;
+  }
+
+  body{
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background:
+      radial-gradient(1200px 600px at 15% 10%, rgba(96,165,250,.18), transparent 55%),
+      radial-gradient(1000px 500px at 85% 25%, rgba(34,211,238,.14), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    overflow-x:hidden;
+  }
+
+  .nav-link{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .nav-link::after{
+    content: "";
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 4px;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, var(--brand), var(--brand2));
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after{
+    transform: scaleX(1);
+  }
+
+  .nav-link.active{
+    color: #ffffff;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .glass{
+    background: var(--card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .profile-container{
+    position:relative;
+    display:inline-block;
+  }
+
+  .loading-ring{
+    position:absolute;
+    inset:-6px;
+    border:2px solid transparent;
+    border-top:2px solid var(--brand);
+    border-right:2px solid var(--brand);
+    border-radius:9999px;
+    animation: spin 2s linear infinite;
+  }
+
+  .loading-ring::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border:2px solid rgba(96,165,250,.12);
+    border-radius:9999px;
+  }
+
+  @keyframes spin{
+    to{ transform:rotate(360deg); }
+  }
+
+  .reveal{
+    opacity:0;
+    transform: translateY(24px);
+    transition: all .9s cubic-bezier(.2,.75,.2,1);
+  }
+
+  .reveal.active{
+    opacity:1;
+    transform: translateY(0);
+  }
+
+  ::-webkit-scrollbar{ width:10px; }
+  ::-webkit-scrollbar-track{ background:#070c18; }
+  ::-webkit-scrollbar-thumb{ background:#22314b; border-radius:6px; }
+  ::-webkit-scrollbar-thumb:hover{ background:#2b3f62; }
+
+  .grad-text{
+    background: linear-gradient(90deg, var(--brand), var(--brand2));
+    -webkit-background-clip: text;
+    background-clip:text;
+    color: transparent;
+  }
+
+  .whatsapp-float{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    width:62px;
+    height:62px;
+    border-radius:9999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#25d366;
+    color:white;
+    box-shadow: 0 10px 25px rgba(0,0,0,.35);
+    z-index:80;
+    text-decoration:none;
+    transition: transform .2s ease, filter .2s ease;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .whatsapp-float:hover{
+    filter: brightness(1.05);
+  }
+
+  .wave-container{
+    position:absolute;
+    inset:0;
+    border-radius:9999px;
+    z-index:-1;
+  }
+
+  .wave{
+    position:absolute;
+    inset:0;
+    border-radius:9999px;
+    background:#25d366;
+    opacity:.55;
+    animation:pulse-wave 2s infinite;
+  }
+
+  .wave:nth-child(2){
+    animation-delay:.55s;
+  }
+
+  @keyframes pulse-wave{
+    from{ transform:scale(1); opacity:.55; }
+    to{ transform:scale(1.9); opacity:0; }
+  }
+
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    background: rgba(2,6,23,.72);
+    backdrop-filter: blur(6px);
+    z-index: 90;
+    display:none;
+  }
+
+  .modal-backdrop.open{
+    display:flex;
+  }
+
+  .tag{
+    border:1px solid rgba(148,163,184,.20);
+    background: rgba(2,6,23,.25);
+  }
+
+  /* MOBILE ONLY FIX: stop blue tick + WhatsApp shaking */
+  @media (max-width: 768px){
+    html, body{
       overflow-x:hidden;
     }
 
-    .nav-link{
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-}
-
-.nav-link::after{
-  content: "";
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 4px;
-  height: 2px;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, var(--brand), var(--brand2));
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after{
-  transform: scaleX(1);
-}
-
-.nav-link.active{
-  color: #ffffff;
-  background: rgba(255,255,255,0.05);
-}
-
-    .glass{
-      background: var(--card);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+    .verified-tick{
+      animation:none !important;
+      transition:none !important;
+      transform:translateZ(0) !important;
+      -webkit-transform:translateZ(0) !important;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
     }
-
-    .profile-container{ position:relative; display:inline-block; }
-    .loading-ring{
-      position:absolute; inset:-6px;
-      border:2px solid transparent;
-      border-top:2px solid var(--brand);
-      border-right:2px solid var(--brand);
-      border-radius:9999px;
-      animation: spin 2s linear infinite;
-    }
-    .loading-ring::before{
-      content:""; position:absolute; inset:-2px;
-      border:2px solid rgba(96,165,250,.12);
-      border-radius:9999px;
-    }
-    @keyframes spin { to{ transform:rotate(360deg);} }
-
-    .reveal{ opacity:0; transform: translateY(24px); transition: all .9s cubic-bezier(.2,.75,.2,1); }
-    .reveal.active{ opacity:1; transform: translateY(0); }
-
-    ::-webkit-scrollbar{ width:10px; }
-    ::-webkit-scrollbar-track{ background:#070c18; }
-    ::-webkit-scrollbar-thumb{ background:#22314b; border-radius:6px; }
-    ::-webkit-scrollbar-thumb:hover{ background:#2b3f62; }
-
-    .grad-text{
-      background: linear-gradient(90deg, var(--brand), var(--brand2));
-      -webkit-background-clip: text;
-      background-clip:text;
-      color: transparent;
-    }
-
-    .nav-link.active{ color: var(--brand); }
 
     .whatsapp-float{
-      position:fixed; bottom:26px; right:26px;
-      width:62px; height:62px; border-radius:9999px;
-      display:flex; align-items:center; justify-content:center;
-      background:#25d366; color:white;
-      box-shadow: 0 10px 25px rgba(0,0,0,.35);
-      z-index: 80;
-      text-decoration:none;
-      transition: transform .2s ease, filter .2s ease;
+      transition:none !important;
+      transform:translateZ(0) !important;
+      -webkit-transform:translateZ(0) !important;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
     }
-    .whatsapp-float:hover{ transform: scale(1.06); filter: brightness(1.05); }
-    .wave-container{ position:absolute; inset:0; border-radius:9999px; z-index:-1; }
-    .wave{ position:absolute; inset:0; border-radius:9999px; background:#25d366; opacity:.55; animation:pulse-wave 2s infinite; }
-    .wave:nth-child(2){ animation-delay:.55s; }
-    @keyframes pulse-wave{ from{ transform:scale(1); opacity:.55;} to{ transform:scale(1.9); opacity:0;} }
 
-    .modal-backdrop{ position:fixed; inset:0; background: rgba(2,6,23,.72); backdrop-filter: blur(6px); z-index: 90; display:none; }
-    .modal-backdrop.open{ display:flex; }
-
-    /* Small helper for tags */
-    .tag{ border:1px solid rgba(148,163,184,.20); background: rgba(2,6,23,.25); }
-  </style>
+    .wave,
+    .wave:nth-child(2){
+      animation:none !important;
+      opacity:0 !important;
+    }
+  }
+</style>
 </head>
 
 <body class="antialiased selection:bg-sky-500/25">
@@ -725,7 +821,7 @@
             <div class="flex gap-3 items-start"><i class="fas fa-book-open text-sky-300 mt-0.5"></i><span>Arabic Grammar Studies (International Sciences Academy, Turkey)</span></div>
           </div>
 
-          <p class="text-slate-500 text-xs mt-6">Note: Add certificate links later if available (Google Drive / PDFs / Badge URLs).</p>
+          <!-- <p class="text-slate-500 text-xs mt-6">Note: Add certificate links later if available (Google Drive / PDFs / Badge URLs).</p> -->
         </div>
       </div>
     </div>
