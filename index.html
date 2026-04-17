@@ -1251,17 +1251,22 @@ document.getElementById("contactForm").addEventListener("submit", async function
       }
     });
 
-    const data = await response.json();
+    let data = {};
+    try {
+      data = await response.json();
+    } catch (err) {
+      data = {};
+    }
 
     if (response.ok) {
       form.reset();
       thankYouBox.classList.remove("hidden");
     } else {
-      console.log(data);
-      alert("Form could not be submitted. Please try again.");
+      console.log("FormSubmit error:", data);
+      alert("Something went wrong. Please try again.");
     }
   } catch (error) {
-    console.error(error);
+    console.error("Network error:", error);
     alert("Error sending message. Please try again.");
   } finally {
     sendBtn.disabled = false;
